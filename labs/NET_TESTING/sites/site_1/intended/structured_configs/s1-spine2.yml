@@ -170,7 +170,7 @@ ethernet_interfaces:
   mtu: 1500
   type: routed
   ip_address: 172.16.1.14/31
-- name: Ethernet6
+- name: Ethernet7
   peer: s1-brdr1
   peer_interface: Ethernet3
   peer_type: l3leaf

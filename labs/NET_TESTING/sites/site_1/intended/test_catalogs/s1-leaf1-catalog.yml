@@ -1,0 +1,37 @@
+anta.tests.connectivity:
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-leaf2.atd.lab
+      neighbor_port: Ethernet1
+      port: Ethernet1
+    result_overwrite:
+      custom_field: 'Local: Ethernet1 - Remote: s1-leaf2 Ethernet1'
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-leaf2.atd.lab
+      neighbor_port: Ethernet6
+      port: Ethernet6
+    result_overwrite:
+      custom_field: 'Local: Ethernet6 - Remote: s1-leaf2 Ethernet6'
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-spine1.atd.lab
+      neighbor_port: Ethernet2
+      port: Ethernet2
+    result_overwrite:
+      custom_field: 'Local: Ethernet2 - Remote: s1-spine1 Ethernet2'
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-spine2.atd.lab
+      neighbor_port: Ethernet2
+      port: Ethernet3
+    result_overwrite:
+      custom_field: 'Local: Ethernet3 - Remote: s1-spine2 Ethernet2'
+anta.tests.logging:
+- VerifyLoggingHosts:
+    hosts:
+    - 10.100.100.100
+    vrf: default
+- VerifyLoggingSourceIntf:
+    interface: Management0
+    vrf: default

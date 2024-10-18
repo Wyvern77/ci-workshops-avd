@@ -1,0 +1,55 @@
+anta.tests.connectivity:
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-leaf1.atd.lab
+      neighbor_port: Ethernet2
+      port: Ethernet2
+    result_overwrite:
+      custom_field: 'Local: Ethernet2 - Remote: s1-leaf1 Ethernet2'
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-leaf2.atd.lab
+      neighbor_port: Ethernet2
+      port: Ethernet3
+    result_overwrite:
+      custom_field: 'Local: Ethernet3 - Remote: s1-leaf2 Ethernet2'
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-leaf3.atd.lab
+      neighbor_port: Ethernet2
+      port: Ethernet4
+    result_overwrite:
+      custom_field: 'Local: Ethernet4 - Remote: s1-leaf3 Ethernet2'
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-leaf4.atd.lab
+      neighbor_port: Ethernet2
+      port: Ethernet5
+    result_overwrite:
+      custom_field: 'Local: Ethernet5 - Remote: s1-leaf4 Ethernet2'
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-brdr1.atd.lab
+      neighbor_port: Ethernet2
+      port: Ethernet7
+    result_overwrite:
+      custom_field: 'Local: Ethernet7 - Remote: s1-brdr1 Ethernet2'
+- VerifyLLDPNeighbors:
+    neighbors:
+    - neighbor_device: s1-brdr2.atd.lab
+      neighbor_port: Ethernet2
+      port: Ethernet8
+    result_overwrite:
+      custom_field: 'Local: Ethernet8 - Remote: s1-brdr2 Ethernet2'
+anta.tests.logging:
+- VerifyLoggingHosts:
+    hosts:
+    - 10.100.100.100
+    vrf: default
+- VerifyLoggingSourceIntf:
+    interface: Management0
+    vrf: default
+anta.tests.system:
+- VerifyCPUUtilization: null
+- VerifyMemoryUtilization: null
+- VerifyFileSystemUtilization: null

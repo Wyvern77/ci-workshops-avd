@@ -1,0 +1,110 @@
+[
+  {
+    "name": "s1-spine2",
+    "test": "VerifyLLDPNeighbors",
+    "categories": [
+      "connectivity"
+    ],
+    "description": "Verifies that the provided LLDP neighbors are connected properly.",
+    "result": "success",
+    "custom_field": "Local: Ethernet2 - Remote: s1-leaf1 Ethernet3"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyLLDPNeighbors",
+    "categories": [
+      "connectivity"
+    ],
+    "description": "Verifies that the provided LLDP neighbors are connected properly.",
+    "result": "success",
+    "custom_field": "Local: Ethernet3 - Remote: s1-leaf2 Ethernet3"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyLLDPNeighbors",
+    "categories": [
+      "connectivity"
+    ],
+    "description": "Verifies that the provided LLDP neighbors are connected properly.",
+    "result": "success",
+    "custom_field": "Local: Ethernet4 - Remote: s1-leaf3 Ethernet3"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyLLDPNeighbors",
+    "categories": [
+      "connectivity"
+    ],
+    "description": "Verifies that the provided LLDP neighbors are connected properly.",
+    "result": "success",
+    "custom_field": "Local: Ethernet5 - Remote: s1-leaf4 Ethernet3"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyLLDPNeighbors",
+    "categories": [
+      "connectivity"
+    ],
+    "description": "Verifies that the provided LLDP neighbors are connected properly.",
+    "result": "success",
+    "custom_field": "Local: Ethernet7 - Remote: s1-brdr1 Ethernet3"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyLLDPNeighbors",
+    "categories": [
+      "connectivity"
+    ],
+    "description": "Verifies that the provided LLDP neighbors are connected properly.",
+    "result": "success",
+    "custom_field": "Local: Ethernet8 - Remote: s1-brdr2 Ethernet3"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyLoggingHosts",
+    "categories": [
+      "logging"
+    ],
+    "description": "Verifies logging hosts (syslog servers) for a specified VRF.",
+    "result": "success"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyLoggingSourceIntf",
+    "categories": [
+      "logging"
+    ],
+    "description": "Verifies logging source-interface for a specified VRF.",
+    "result": "success"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyCPUUtilization",
+    "categories": [
+      "system"
+    ],
+    "description": "Verifies whether the CPU utilization is below 75%.",
+    "result": "success"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyFileSystemUtilization",
+    "categories": [
+      "system"
+    ],
+    "description": "Verifies that no partition is utilizing more than 75% of its disk space.",
+    "result": "success"
+  },
+  {
+    "name": "s1-spine2",
+    "test": "VerifyMemoryUtilization",
+    "categories": [
+      "system"
+    ],
+    "description": "Verifies whether the memory utilization is below 75%.",
+    "result": "failure",
+    "messages": [
+      "Device has reported a high memory usage: 93.85%"
+    ]
+  }
+]

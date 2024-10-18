@@ -12,6 +12,7 @@
   - [AAA Authorization](#aaa-authorization)
 - [Monitoring](#monitoring)
   - [TerminAttr Daemon](#terminattr-daemon)
+  - [Logging](#logging)
 - [MLAG](#mlag)
   - [MLAG Summary](#mlag-summary)
   - [MLAG Device Configuration](#mlag-device-configuration)
@@ -184,6 +185,33 @@ daemon TerminAttr
    no shutdown
 ```
 
+### Logging
+
+#### Logging Servers and Features Summary
+
+| Type | Level |
+| -----| ----- |
+| Buffer | notifications |
+| Trap | debugging |
+
+| VRF | Source Interface |
+| --- | ---------------- |
+| default | Management0 |
+
+| VRF | Hosts | Ports | Protocol |
+| --- | ----- | ----- | -------- |
+| default | 10.100.100.100 | Default | UDP |
+
+#### Logging Servers and Features Device Configuration
+
+```eos
+!
+logging buffered 8000 notifications
+logging trap debugging
+logging host 10.100.100.100
+logging source-interface Management0
+```
+
 ## MLAG
 
 ### MLAG Summary
@@ -255,6 +283,7 @@ vlan internal order ascending range 1006 1199
 | ------- | ---- | ------------ |
 | 10 | Ten | - |
 | 20 | Twenty | - |
+| 30 | Thiry | - |
 | 3009 | MLAG_iBGP_OVERLAY | LEAF_PEER_L3 |
 | 4093 | LEAF_PEER_L3 | LEAF_PEER_L3 |
 | 4094 | MLAG_PEER | MLAG |
@@ -268,6 +297,9 @@ vlan 10
 !
 vlan 20
    name Twenty
+!
+vlan 30
+   name Thiry
 !
 vlan 3009
    name MLAG_iBGP_OVERLAY
@@ -301,8 +333,8 @@ vlan 4094
 
 | Interface | Description | Type | Channel Group | IP Address | VRF |  MTU | Shutdown | ACL In | ACL Out |
 | --------- | ----------- | -----| ------------- | ---------- | ----| ---- | -------- | ------ | ------- |
-| Ethernet2 | P2P_LINK_TO_S1-SPINE1_Ethernet6 | routed | - | 172.16.1.17/31 | default | 1500 | False | - | - |
-| Ethernet3 | P2P_LINK_TO_S1-SPINE2_Ethernet6 | routed | - | 172.16.1.19/31 | default | 1500 | False | - | - |
+| Ethernet2 | P2P_LINK_TO_S1-SPINE1_Ethernet7 | routed | - | 172.16.1.17/31 | default | 1500 | False | - | - |
+| Ethernet3 | P2P_LINK_TO_S1-SPINE2_Ethernet7 | routed | - | 172.16.1.19/31 | default | 1500 | False | - | - |
 | Ethernet4 | P2P_LINK_TO_s2-brdr1_Ethernet4 | routed | - | 172.16.255.0/31 | default | 1500 | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
@@ -315,14 +347,14 @@ interface Ethernet1
    channel-group 1 mode active
 !
 interface Ethernet2
-   description P2P_LINK_TO_S1-SPINE1_Ethernet6
+   description P2P_LINK_TO_S1-SPINE1_Ethernet7
    no shutdown
    mtu 1500
    no switchport
    ip address 172.16.1.17/31
 !
 interface Ethernet3
-   description P2P_LINK_TO_S1-SPINE2_Ethernet6
+   description P2P_LINK_TO_S1-SPINE2_Ethernet7
    no shutdown
    mtu 1500
    no switchport
@@ -405,6 +437,7 @@ interface Loopback1
 | --------- | ----------- | --- | ---- | -------- |
 | Vlan10 | Ten | OVERLAY | - | False |
 | Vlan20 | Twenty | OVERLAY | - | False |
+| Vlan30 | Thiry | OVERLAY | - | False |
 | Vlan3009 | MLAG_PEER_L3_iBGP: vrf OVERLAY | OVERLAY | 1500 | False |
 | Vlan4093 | MLAG_PEER_L3_PEERING | default | 1500 | False |
 | Vlan4094 | MLAG_PEER | default | 1500 | False |
@@ -415,6 +448,7 @@ interface Loopback1
 | --------- | --- | ---------- | ------------------ | ------------------------- | ---- | ------ | ------- |
 | Vlan10 |  OVERLAY  |  -  |  10.10.10.1/24  |  -  |  -  |  -  |  -  |
 | Vlan20 |  OVERLAY  |  -  |  10.20.20.1/24  |  -  |  -  |  -  |  -  |
+| Vlan30 |  OVERLAY  |  -  |  10.30.30.1/24  |  -  |  -  |  -  |  -  |
 | Vlan3009 |  OVERLAY  |  10.252.1.8/31  |  -  |  -  |  -  |  -  |  -  |
 | Vlan4093 |  default  |  10.252.1.8/31  |  -  |  -  |  -  |  -  |  -  |
 | Vlan4094 |  default  |  10.251.1.8/31  |  -  |  -  |  -  |  -  |  -  |
@@ -434,6 +468,12 @@ interface Vlan20
    no shutdown
    vrf OVERLAY
    ip address virtual 10.20.20.1/24
+!
+interface Vlan30
+   description Thiry
+   no shutdown
+   vrf OVERLAY
+   ip address virtual 10.30.30.1/24
 !
 interface Vlan3009
    description MLAG_PEER_L3_iBGP: vrf OVERLAY
@@ -472,6 +512,7 @@ interface Vlan4094
 | ---- | --- | ---------- | --------------- |
 | 10 | 10010 | - | - |
 | 20 | 10020 | - | - |
+| 30 | 10030 | - | - |
 
 ##### VRF to VNI and Multicast Group Mappings
 
@@ -490,6 +531,7 @@ interface Vxlan1
    vxlan udp-port 4789
    vxlan vlan 10 vni 10010
    vxlan vlan 20 vni 10020
+   vxlan vlan 30 vni 10030
    vxlan vrf OVERLAY vni 10
 ```
 
@@ -652,6 +694,7 @@ ASN Notation: asplain
 | ---- | ------------------- | ----------------- | ------------------- | ------------------- | ------------ |
 | 10 | 10.250.1.7:10010 | 10010:10010<br>remote 10010:10010 | - | - | learned |
 | 20 | 10.250.1.7:10020 | 10020:10020<br>remote 10020:10020 | - | - | learned |
+| 30 | 10.250.1.7:10030 | 10030:10030<br>remote 10030:10030 | - | - | learned |
 
 #### Router BGP VRFs
 
@@ -705,10 +748,10 @@ router bgp 65103
    neighbor 10.252.1.9 description s1-brdr2
    neighbor 172.16.1.16 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.1.16 remote-as 65100
-   neighbor 172.16.1.16 description s1-spine1_Ethernet6
+   neighbor 172.16.1.16 description s1-spine1_Ethernet7
    neighbor 172.16.1.18 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.1.18 remote-as 65100
-   neighbor 172.16.1.18 description s1-spine2_Ethernet6
+   neighbor 172.16.1.18 description s1-spine2_Ethernet7
    neighbor 172.16.255.1 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.255.1 remote-as 65203
    neighbor 172.16.255.1 description s2-brdr1
@@ -726,6 +769,13 @@ router bgp 65103
       rd evpn domain remote 10.250.1.7:10020
       route-target both 10020:10020
       route-target import export evpn domain remote 10020:10020
+      redistribute learned
+   !
+   vlan 30
+      rd 10.250.1.7:10030
+      rd evpn domain remote 10.250.1.7:10030
+      route-target both 10030:10030
+      route-target import export evpn domain remote 10030:10030
       redistribute learned
    !
    address-family evpn

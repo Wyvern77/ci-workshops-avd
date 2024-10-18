@@ -12,6 +12,7 @@
   - [AAA Authorization](#aaa-authorization)
 - [Monitoring](#monitoring)
   - [TerminAttr Daemon](#terminattr-daemon)
+  - [Logging](#logging)
 - [Spanning Tree](#spanning-tree)
   - [Spanning Tree Summary](#spanning-tree-summary)
   - [Spanning Tree Device Configuration](#spanning-tree-device-configuration)
@@ -172,6 +173,33 @@ daemon TerminAttr
    no shutdown
 ```
 
+### Logging
+
+#### Logging Servers and Features Summary
+
+| Type | Level |
+| -----| ----- |
+| Buffer | notifications |
+| Trap | debugging |
+
+| VRF | Source Interface |
+| --- | ---------------- |
+| default | Management0 |
+
+| VRF | Hosts | Ports | Protocol |
+| --- | ----- | ----- | -------- |
+| default | 10.100.100.100 | Default | UDP |
+
+#### Logging Servers and Features Device Configuration
+
+```eos
+!
+logging buffered 8000 notifications
+logging trap debugging
+logging host 10.100.100.100
+logging source-interface Management0
+```
+
 ## Spanning Tree
 
 ### Spanning Tree Summary
@@ -221,7 +249,7 @@ vlan internal order ascending range 1006 1199
 | Ethernet3 | P2P_LINK_TO_S1-LEAF2_Ethernet3 | routed | - | 172.16.1.6/31 | default | 1500 | False | - | - |
 | Ethernet4 | P2P_LINK_TO_S1-LEAF3_Ethernet3 | routed | - | 172.16.1.10/31 | default | 1500 | False | - | - |
 | Ethernet5 | P2P_LINK_TO_S1-LEAF4_Ethernet3 | routed | - | 172.16.1.14/31 | default | 1500 | False | - | - |
-| Ethernet6 | P2P_LINK_TO_S1-BRDR1_Ethernet3 | routed | - | 172.16.1.18/31 | default | 1500 | False | - | - |
+| Ethernet7 | P2P_LINK_TO_S1-BRDR1_Ethernet3 | routed | - | 172.16.1.18/31 | default | 1500 | False | - | - |
 | Ethernet8 | P2P_LINK_TO_S1-BRDR2_Ethernet3 | routed | - | 172.16.1.22/31 | default | 1500 | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
@@ -256,7 +284,7 @@ interface Ethernet5
    no switchport
    ip address 172.16.1.14/31
 !
-interface Ethernet6
+interface Ethernet7
    description P2P_LINK_TO_S1-BRDR1_Ethernet3
    no shutdown
    mtu 1500
