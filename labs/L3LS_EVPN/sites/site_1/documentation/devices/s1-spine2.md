@@ -12,6 +12,7 @@
   - [AAA Authorization](#aaa-authorization)
 - [Monitoring](#monitoring)
   - [TerminAttr Daemon](#terminattr-daemon)
+  - [Logging](#logging)
 - [Spanning Tree](#spanning-tree)
   - [Spanning Tree Summary](#spanning-tree-summary)
   - [Spanning Tree Device Configuration](#spanning-tree-device-configuration)
@@ -172,6 +173,31 @@ daemon TerminAttr
    no shutdown
 ```
 
+### Logging
+
+#### Logging Servers and Features Summary
+
+| Type | Level |
+| -----| ----- |
+
+| VRF | Source Interface |
+| --- | ---------------- |
+| default | Management0 |
+
+| VRF | Hosts | Ports | Protocol |
+| --- | ----- | ----- | -------- |
+| default | 10.200.0.108 | Default | UDP |
+| default | 10.200.1.108 | Default | UDP |
+
+#### Logging Servers and Features Device Configuration
+
+```eos
+!
+logging host 10.200.0.108
+logging host 10.200.1.108
+logging source-interface Management0
+```
+
 ## Spanning Tree
 
 ### Spanning Tree Summary
@@ -223,6 +249,8 @@ vlan internal order ascending range 1006 1199
 | Ethernet5 | P2P_LINK_TO_S1-LEAF4_Ethernet3 | routed | - | 172.16.1.14/31 | default | 1500 | False | - | - |
 | Ethernet7 | P2P_LINK_TO_S1-BRDR1_Ethernet3 | routed | - | 172.16.1.18/31 | default | 1500 | False | - | - |
 | Ethernet8 | P2P_LINK_TO_S1-BRDR2_Ethernet3 | routed | - | 172.16.1.22/31 | default | 1500 | False | - | - |
+| Ethernet9 | P2P_LINK_TO_S1-LEAF5_Ethernet3 | routed | - | 172.16.1.26/31 | default | 1500 | False | - | - |
+| Ethernet10 | P2P_LINK_TO_S1-LEAF6_Ethernet3 | routed | - | 172.16.1.30/31 | default | 1500 | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -269,6 +297,20 @@ interface Ethernet8
    mtu 1500
    no switchport
    ip address 172.16.1.22/31
+!
+interface Ethernet9
+   description P2P_LINK_TO_S1-LEAF5_Ethernet3
+   no shutdown
+   mtu 1500
+   no switchport
+   ip address 172.16.1.26/31
+!
+interface Ethernet10
+   description P2P_LINK_TO_S1-LEAF6_Ethernet3
+   no shutdown
+   mtu 1500
+   no switchport
+   ip address 172.16.1.30/31
 ```
 
 ### Loopback Interfaces
@@ -394,12 +436,16 @@ ASN Notation: asplain
 | 10.250.1.6 | 65102 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.250.1.7 | 65103 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.250.1.8 | 65103 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
+| 10.250.1.9 | 65104 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
+| 10.250.1.10 | 65104 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 172.16.1.3 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.7 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.11 | 65102 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.15 | 65102 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.19 | 65103 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.23 | 65103 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
+| 172.16.1.27 | 65104 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
+| 172.16.1.31 | 65104 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 
 #### Router BGP EVPN Address Family
 
@@ -447,6 +493,12 @@ router bgp 65100
    neighbor 10.250.1.8 peer group EVPN-OVERLAY-PEERS
    neighbor 10.250.1.8 remote-as 65103
    neighbor 10.250.1.8 description s1-brdr2
+   neighbor 10.250.1.9 peer group EVPN-OVERLAY-PEERS
+   neighbor 10.250.1.9 remote-as 65104
+   neighbor 10.250.1.9 description s1-leaf5
+   neighbor 10.250.1.10 peer group EVPN-OVERLAY-PEERS
+   neighbor 10.250.1.10 remote-as 65104
+   neighbor 10.250.1.10 description s1-leaf6
    neighbor 172.16.1.3 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.1.3 remote-as 65101
    neighbor 172.16.1.3 description s1-leaf1_Ethernet3
@@ -465,6 +517,12 @@ router bgp 65100
    neighbor 172.16.1.23 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.1.23 remote-as 65103
    neighbor 172.16.1.23 description s1-brdr2_Ethernet3
+   neighbor 172.16.1.27 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.16.1.27 remote-as 65104
+   neighbor 172.16.1.27 description s1-leaf5_Ethernet3
+   neighbor 172.16.1.31 peer group IPv4-UNDERLAY-PEERS
+   neighbor 172.16.1.31 remote-as 65104
+   neighbor 172.16.1.31 description s1-leaf6_Ethernet3
    redistribute connected route-map RM-CONN-2-BGP
    !
    address-family evpn

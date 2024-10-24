@@ -64,6 +64,16 @@ router_bgp:
     remote_as: '65103'
     peer: s1-brdr2
     description: s1-brdr2_Ethernet3
+  - ip_address: 172.16.1.27
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65104'
+    peer: s1-leaf5
+    description: s1-leaf5_Ethernet3
+  - ip_address: 172.16.1.31
+    peer_group: IPv4-UNDERLAY-PEERS
+    remote_as: '65104'
+    peer: s1-leaf6
+    description: s1-leaf6_Ethernet3
   - ip_address: 10.250.1.7
     peer_group: EVPN-OVERLAY-PEERS
     peer: s1-brdr1
@@ -94,6 +104,16 @@ router_bgp:
     peer: s1-leaf4
     description: s1-leaf4
     remote_as: '65102'
+  - ip_address: 10.250.1.9
+    peer_group: EVPN-OVERLAY-PEERS
+    peer: s1-leaf5
+    description: s1-leaf5
+    remote_as: '65104'
+  - ip_address: 10.250.1.10
+    peer_group: EVPN-OVERLAY-PEERS
+    peer: s1-leaf6
+    description: s1-leaf6
+    remote_as: '65104'
   address_family_evpn:
     peer_groups:
     - name: EVPN-OVERLAY-PEERS
@@ -188,6 +208,24 @@ ethernet_interfaces:
   mtu: 1500
   type: routed
   ip_address: 172.16.1.22/31
+- name: Ethernet9
+  peer: s1-leaf5
+  peer_interface: Ethernet3
+  peer_type: l3leaf
+  description: P2P_LINK_TO_S1-LEAF5_Ethernet3
+  shutdown: false
+  mtu: 1500
+  type: routed
+  ip_address: 172.16.1.26/31
+- name: Ethernet10
+  peer: s1-leaf6
+  peer_interface: Ethernet3
+  peer_type: l3leaf
+  description: P2P_LINK_TO_S1-LEAF6_Ethernet3
+  shutdown: false
+  mtu: 1500
+  type: routed
+  ip_address: 172.16.1.30/31
 loopback_interfaces:
 - name: Loopback0
   description: EVPN_Overlay_Peering
