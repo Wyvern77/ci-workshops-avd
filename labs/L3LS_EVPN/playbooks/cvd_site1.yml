@@ -1,0 +1,13 @@
+---
+- name: Configuration deployment
+  hosts: SITE1_FABRIC
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Deploy configurations and tags to CloudVision
+      ansible.builtin.import_role:
+        name: arista.avd.cv_deploy
+      vars:
+        cv_server: 192.168.0.5
+        cv_token: eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJkaWQiOjczOTU1NzUzNTQ1OTA0OTQ5NDEsImRzbiI6ImFyaXN0YSIsImRzdCI6ImFjY291bnQiLCJleHAiOjE3MzIzOTI0MzIsImlhdCI6MTczMTA5NjQ1OSwib2dpIjozLCJvZ24iOiJEZWZhdWx0Iiwic2lkIjoiYTFmMWI4OWZkZTkwYmZhYjY3ZThhZTY4OGIyYzE2NDEzOGQyMWNjYmM0YzQyZGRiYTRjZDc0MDM3ZjliNTNlMi14Smt3VXVVVlFhd1VzTFAtR0xEMjlLVzNBTFVJdlBtclc0UDRoNExLIn0.SiMMxuhwEn6SYjThvWo9P9JwV8_qLI7z0gRG40srJzleHFRLfz0Ga8WkZA862pRKdB_xAGORmEy6lIifzFit4mBUqQA_sOvA-Cpghpi-89cHQckGe9P1p9lM_6DPhfDhSI_6Q3nqcFvojQfckjsklCeXkbQzxT5pJPTs8XoUmaQdAZCEj8UKwmfbI9JvlUJnIWdC6bp551kCBYNiU9Hxb5am-8uoEKP8GcAFq4sfqiuZ5Tvo7v4krjRgrw1PwdmyQ0YjAm3GhWsQsCQ78O-4RogWoAJC0FL6MILzAsgBtymJBeqXZajFAZ7wwjM0O0qMDGZRKuRNhSQp5PxvMm2egY30GyOhoOvj9IJCIFlzAdnHrKJsUTVXbZ4vcD044zUOMVjMR7keD1FHRnxIwKsGnYqQCDrkoig0IgC2teycWuHg8LaX5AGrmU9yqcRzu41PnJ0MTeZLSP6i9SBYVqMml2yYNBU_MmQpMmt8AHISYDzyavCXmx-PrwoGlean_OL4SB89MllcZf1p2EqdbRBGAhd6Kd0-p24laEd2PlWxl0Tj7I3pvDL5YN9mIteuTeiVSHYiW7MVDteBjjZ-QalyTbKkCdex943_hnotYbtDb8-_1Yy-At1bnihbEBVAn5hkIoDavdohI9I1FIjPNf1pQKyI7Obl_4_hQ0Qf_GE7mYU
+        cv_verify_certs: false

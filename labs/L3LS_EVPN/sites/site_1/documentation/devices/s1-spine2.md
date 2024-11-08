@@ -134,7 +134,7 @@ management api http-commands
 ```eos
 !
 username arista privilege 15 role network-admin secret sha512 <removed>
-username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsfybxOJsI+I/Pww72/o4oxYQOOu/3aswQnspoTsEOiaqtUgDjDPcaPqKEIaAXB/EJExTaFyqI7uQQNmx2cZY9oDcVrb51nyNUZgjefYJKYr2FYLTSibEUm2jyocWxMf68AvNOMUTbQsauTinPDsP36rNXEX5J2HcbOI7idgT1P2574gzM9SqwxlNvMqPQK81XsuKBEW6WxOviLW71OrW62f0HJBK4B1SFfF6hPKV/e8+4r+1RIVnuwLTbwNfXMH7H9q17m5HDqfG9HvN7RtlUcWbf8uCsQJob876cDsjTY7f91opXL4unPEKLCvsenBkpXeH12ZlVU/idy85+WqKB arista@avd-l3ls-wkshp-g1-24-6f980434-eos.c.atds-280712.internal
+username arista ssh-key ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNU7ELPW5HsA02+X5Aiz7o/YRvKU8zn+SYLGdirwwENZ0XhABDMqAtEj+ej24k7BKfkJ/2xldB3SJkExH4/zSZyoM3BwTrzgn/2/hhi6W5zsFK42i0kX5nZLT7aBpiIx2EYdJvBqve0WawOdufr7WbUXJCTiM2/NTV1kVzzH1AomDIqcbt3PM6SUwKEuOflqa1wajG7SbU7VZEeNpn7jxDruRzhJrweBdtAQBkI7789oh0sIbMFO/6rLeG0fF7ibwGYSO4/8Y4lckFwh5nC1l3hJHLhkzdJ3bSdHs2/f4DBH4NzklNYVuf4TIi0ucYp98jeqAaYKIXACAPECBLR4yl arista@oclc-adam-nov2024-1-84ed1105-eos
 ```
 
 ### AAA Authorization
@@ -249,8 +249,6 @@ vlan internal order ascending range 1006 1199
 | Ethernet5 | P2P_LINK_TO_S1-LEAF4_Ethernet3 | routed | - | 172.16.1.14/31 | default | 1500 | False | - | - |
 | Ethernet7 | P2P_LINK_TO_S1-BRDR1_Ethernet3 | routed | - | 172.16.1.18/31 | default | 1500 | False | - | - |
 | Ethernet8 | P2P_LINK_TO_S1-BRDR2_Ethernet3 | routed | - | 172.16.1.22/31 | default | 1500 | False | - | - |
-| Ethernet9 | P2P_LINK_TO_S1-LEAF5_Ethernet3 | routed | - | 172.16.1.26/31 | default | 1500 | False | - | - |
-| Ethernet10 | P2P_LINK_TO_S1-LEAF6_Ethernet3 | routed | - | 172.16.1.30/31 | default | 1500 | False | - | - |
 
 #### Ethernet Interfaces Device Configuration
 
@@ -297,20 +295,6 @@ interface Ethernet8
    mtu 1500
    no switchport
    ip address 172.16.1.22/31
-!
-interface Ethernet9
-   description P2P_LINK_TO_S1-LEAF5_Ethernet3
-   no shutdown
-   mtu 1500
-   no switchport
-   ip address 172.16.1.26/31
-!
-interface Ethernet10
-   description P2P_LINK_TO_S1-LEAF6_Ethernet3
-   no shutdown
-   mtu 1500
-   no switchport
-   ip address 172.16.1.30/31
 ```
 
 ### Loopback Interfaces
@@ -436,16 +420,12 @@ ASN Notation: asplain
 | 10.250.1.6 | 65102 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.250.1.7 | 65103 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 10.250.1.8 | 65103 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
-| 10.250.1.9 | 65104 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
-| 10.250.1.10 | 65104 | default | - | Inherited from peer group EVPN-OVERLAY-PEERS | Inherited from peer group EVPN-OVERLAY-PEERS | - | Inherited from peer group EVPN-OVERLAY-PEERS | - | - | - | - |
 | 172.16.1.3 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.7 | 65101 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.11 | 65102 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.15 | 65102 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.19 | 65103 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 | 172.16.1.23 | 65103 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
-| 172.16.1.27 | 65104 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
-| 172.16.1.31 | 65104 | default | - | Inherited from peer group IPv4-UNDERLAY-PEERS | Inherited from peer group IPv4-UNDERLAY-PEERS | - | - | - | - | - | - |
 
 #### Router BGP EVPN Address Family
 
@@ -493,12 +473,6 @@ router bgp 65100
    neighbor 10.250.1.8 peer group EVPN-OVERLAY-PEERS
    neighbor 10.250.1.8 remote-as 65103
    neighbor 10.250.1.8 description s1-brdr2
-   neighbor 10.250.1.9 peer group EVPN-OVERLAY-PEERS
-   neighbor 10.250.1.9 remote-as 65104
-   neighbor 10.250.1.9 description s1-leaf5
-   neighbor 10.250.1.10 peer group EVPN-OVERLAY-PEERS
-   neighbor 10.250.1.10 remote-as 65104
-   neighbor 10.250.1.10 description s1-leaf6
    neighbor 172.16.1.3 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.1.3 remote-as 65101
    neighbor 172.16.1.3 description s1-leaf1_Ethernet3
@@ -517,12 +491,6 @@ router bgp 65100
    neighbor 172.16.1.23 peer group IPv4-UNDERLAY-PEERS
    neighbor 172.16.1.23 remote-as 65103
    neighbor 172.16.1.23 description s1-brdr2_Ethernet3
-   neighbor 172.16.1.27 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.16.1.27 remote-as 65104
-   neighbor 172.16.1.27 description s1-leaf5_Ethernet3
-   neighbor 172.16.1.31 peer group IPv4-UNDERLAY-PEERS
-   neighbor 172.16.1.31 remote-as 65104
-   neighbor 172.16.1.31 description s1-leaf6_Ethernet3
    redistribute connected route-map RM-CONN-2-BGP
    !
    address-family evpn

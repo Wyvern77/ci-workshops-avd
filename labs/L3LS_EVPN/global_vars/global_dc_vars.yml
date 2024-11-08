@@ -16,6 +16,7 @@ ansible_python_interpreter: $(which python3)
 avd_data_conversion_mode: error
 avd_data_validation_mode: error
 
+
 # CVP node variables
 cv_collection: v3
 execute_tasks: true

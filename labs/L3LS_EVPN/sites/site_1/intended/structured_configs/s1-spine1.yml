@@ -64,16 +64,6 @@ router_bgp:
     remote_as: '65103'
     peer: s1-brdr2
     description: s1-brdr2_Ethernet2
-  - ip_address: 172.16.1.25
-    peer_group: IPv4-UNDERLAY-PEERS
-    remote_as: '65104'
-    peer: s1-leaf5
-    description: s1-leaf5_Ethernet2
-  - ip_address: 172.16.1.29
-    peer_group: IPv4-UNDERLAY-PEERS
-    remote_as: '65104'
-    peer: s1-leaf6
-    description: s1-leaf6_Ethernet2
   - ip_address: 10.250.1.7
     peer_group: EVPN-OVERLAY-PEERS
     peer: s1-brdr1
@@ -104,16 +94,6 @@ router_bgp:
     peer: s1-leaf4
     description: s1-leaf4
     remote_as: '65102'
-  - ip_address: 10.250.1.9
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: s1-leaf5
-    description: s1-leaf5
-    remote_as: '65104'
-  - ip_address: 10.250.1.10
-    peer_group: EVPN-OVERLAY-PEERS
-    peer: s1-leaf6
-    description: s1-leaf6
-    remote_as: '65104'
   address_family_evpn:
     peer_groups:
     - name: EVPN-OVERLAY-PEERS
@@ -135,9 +115,9 @@ local_users:
 - name: arista
   privilege: 15
   role: network-admin
-  sha512_password: $6$arista$4D6fhTu3RgS/zsulPim9pxDFy0ARFiLGhWSPhY8SmXtRHMVjPImO6PcHNp4VaLY7g79iCDEqH87nvrbBdprkb1
-  ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCsfybxOJsI+I/Pww72/o4oxYQOOu/3aswQnspoTsEOiaqtUgDjDPcaPqKEIaAXB/EJExTaFyqI7uQQNmx2cZY9oDcVrb51nyNUZgjefYJKYr2FYLTSibEUm2jyocWxMf68AvNOMUTbQsauTinPDsP36rNXEX5J2HcbOI7idgT1P2574gzM9SqwxlNvMqPQK81XsuKBEW6WxOviLW71OrW62f0HJBK4B1SFfF6hPKV/e8+4r+1RIVnuwLTbwNfXMH7H9q17m5HDqfG9HvN7RtlUcWbf8uCsQJob876cDsjTY7f91opXL4unPEKLCvsenBkpXeH12ZlVU/idy85+WqKB
-    arista@avd-l3ls-wkshp-g1-24-6f980434-eos.c.atds-280712.internal
+  sha512_password: $6$arista$RNhbsDpK/JRtCW47KTRlt8hztIF3Pw0sijbTbh39A1xLT0OrH4GunbRlL7Y9be/3Ie7KvuXQBsj7AAnKZ/Bz71
+  ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNU7ELPW5HsA02+X5Aiz7o/YRvKU8zn+SYLGdirwwENZ0XhABDMqAtEj+ej24k7BKfkJ/2xldB3SJkExH4/zSZyoM3BwTrzgn/2/hhi6W5zsFK42i0kX5nZLT7aBpiIx2EYdJvBqve0WawOdufr7WbUXJCTiM2/NTV1kVzzH1AomDIqcbt3PM6SUwKEuOflqa1wajG7SbU7VZEeNpn7jxDruRzhJrweBdtAQBkI7789oh0sIbMFO/6rLeG0fF7ibwGYSO4/8Y4lckFwh5nC1l3hJHLhkzdJ3bSdHs2/f4DBH4NzklNYVuf4TIi0ucYp98jeqAaYKIXACAPECBLR4yl
+    arista@oclc-adam-nov2024-1-84ed1105-eos
 vrfs:
 - name: default
   ip_routing: false
@@ -208,24 +188,6 @@ ethernet_interfaces:
   mtu: 1500
   type: routed
   ip_address: 172.16.1.20/31
-- name: Ethernet9
-  peer: s1-leaf5
-  peer_interface: Ethernet2
-  peer_type: l3leaf
-  description: P2P_LINK_TO_S1-LEAF5_Ethernet2
-  shutdown: false
-  mtu: 1500
-  type: routed
-  ip_address: 172.16.1.24/31
-- name: Ethernet10
-  peer: s1-leaf6
-  peer_interface: Ethernet2
-  peer_type: l3leaf
-  description: P2P_LINK_TO_S1-LEAF6_Ethernet2
-  shutdown: false
-  mtu: 1500
-  type: routed
-  ip_address: 172.16.1.28/31
 loopback_interfaces:
 - name: Loopback0
   description: EVPN_Overlay_Peering

@@ -22,6 +22,10 @@ deploy-site-1: ## Deploy Configs via eAPI
 cvp-site-1: ## Deploy Configs via eAPI
 	ansible-playbook playbooks/cvp1.yml -i sites/site_1/inventory.yml
 
+.PHONY: cvd-site-1
+cvd-site-1: ## Deploy Configs via eAPI
+	ansible-playbook playbooks/cvd_site1.yml -i sites/site_1/inventory.yml
+
 ########################################################
 # Site 2
 ########################################################
@@ -41,6 +45,10 @@ deploy-site-2: ## Deploy Configs via eAPI
 .PHONY: cvp-site-2
 cvp-site-2: ## Deploy Configs via eAPI
 	ansible-playbook playbooks/cvp2.yml -i sites/site_2/inventory.yml
+
+.PHONY: cvd-site-2
+cvd-site-2: ## Deploy Configs via eAPI
+	ansible-playbook playbooks/cvd_site2.yml -i sites/site_2/inventory.yml
 
 ########################################################
 # WAN & Hosts - Lab Prep
